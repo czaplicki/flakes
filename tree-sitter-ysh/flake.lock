@@ -1,0 +1,44 @@
+{
+  "nodes": {
+    "nixpkgs": {
+      "locked": {
+        "lastModified": 1770019141,
+        "narHash": "sha256-VKS4ZLNx4PNrABoB0L8KUpc1fE7CLpQXQs985tGfaCU=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "cb369ef2efd432b3cdf8622b0ffc0a97a02f3137",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "root": {
+      "inputs": {
+        "nixpkgs": "nixpkgs",
+        "ysh-src": "ysh-src"
+      }
+    },
+    "ysh-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1764089850,
+        "narHash": "sha256-2QIm3CUssXAU5hzgd4Dovu+neS6Z69ov6b2DdO3JOjU=",
+        "owner": "danyspin97",
+        "repo": "tree-sitter-ysh",
+        "rev": "bb2e404f293b7c9712f667b96a5538a358567038",
+        "type": "github"
+      },
+      "original": {
+        "owner": "danyspin97",
+        "repo": "tree-sitter-ysh",
+        "type": "github"
+      }
+    }
+  },
+  "root": "root",
+  "version": 7
+}
