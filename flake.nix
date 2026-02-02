@@ -6,10 +6,25 @@
     ysh-lsp.url = "github:czaplicki/oils/master?dir=editors/vscode-ysh";
     tree-sitter-ysh.url = "path:./tree-sitter-ysh";
   };
-  outputs = inputs@{self, ...}: {
+  outputs = inputs@{self, ...}: let
 
-    packages = inputs.ysh-lsp.packages
-            // inputs.tree-sitter-ysh.packages;
+    # Takes the packages output from inputs
+    # and merges to a singel packages output,
+    # ingnoring default pkgs
+    mergeInputPackages = let
+
+      mergePkgs = builtins.foldl' (
+          acc: vlu: acc // builtins.removeAttrs vlu [ "default" ]
+      ) {};
+
+    in builtins.zipAttrsWith (_: mergePkgs);
+
+  in {
+
+    packages = mergeInputPackages [
+      inputs.ysh-lsp.packages
+      inputs.tree-sitter-ysh.packages
+    ];
 
     overlays.default = final: prev: {
       ysh-lsp = self.packages.${prev.system}.ysh-lsp;
