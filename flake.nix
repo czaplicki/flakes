@@ -3,10 +3,10 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    mmw.url = "github:czaplicki/mmw";
     ysh-lsp.url = "github:czaplicki/oils/master?dir=editors/vscode-ysh";
     nu-lint.url = "git+https://codeberg.org/wvhulle/nu-lint";
     tree-sitter-ysh.url = "path:./tree-sitter-ysh";
-
   };
   outputs = inputs@{self, ...}: let
 
@@ -61,10 +61,12 @@
     packages = mergePackagesSets [
       inputs.ysh-lsp.packages
       inputs.tree-sitter-ysh.packages
+      inputs.mmw.packages
       (exportDefaultAs "nu-lint" inputs.nu-lint.packages)
     ];
 
     overlays.default = final: prev: {
+      mww = self.packages.${prev.system}.mww;
       nu-lint = self.packages.${prev.system}.nu-lint;
       ysh-lsp = self.packages.${prev.system}.ysh-lsp;
       tree-sitter-grammars = prev.tree-sitter-grammars // {
